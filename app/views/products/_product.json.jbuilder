@@ -3,7 +3,8 @@ json.name product.name
 json.price product.price
 json.image_url product.image_url
 json.description product.description
+json.tax product.tax
+json.total product.total
+json.is_discounted? product.is_discounted?
 json.created_at product.created_at
-json.upper_case product.upper_case
-json.total_price product.total_price
 json.updated_at product.updated_at

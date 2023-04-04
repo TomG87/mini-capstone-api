@@ -1,12 +1,20 @@
 class Product < ApplicationRecord
 
-  def total_price
-    total_price = price.to_f * 1.07
-    return total_price
+  def tax
+    tax = price * 0.09
+    return tax
+  end
+  
+  def total
+    total = price + tax
+    return total
   end
 
-  def upper_case
-    upper_case = name.upcase
-    return upper_case
+  def is_discounted?
+    if price <= 10 
+      return true
+    else
+      return false
+    end
   end
 end
