@@ -1,5 +1,9 @@
 class Product < ApplicationRecord
 
+  validates :name, length: {minimum:3}
+  validates :price, presence: true
+  validates :description, length: {maximum: 500} 
+
   def tax
     tax = price * 0.09
     return tax
