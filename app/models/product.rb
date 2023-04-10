@@ -9,6 +9,10 @@ class Product < ApplicationRecord
     return tax
   end
   
+  def supplier
+    Supplier.find_by(id:supplier_id)
+  end
+
   def total
     total = price + tax
     return total
