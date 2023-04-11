@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
 
+  belongs_to :supplier
+
   validates :name, length: {minimum:3}
   validates :price, presence: true
   validates :description, length: {maximum: 500} 
@@ -9,9 +11,7 @@ class Product < ApplicationRecord
     return tax
   end
   
-  def supplier
-    Supplier.find_by(id:supplier_id)
-  end
+
 
   def total
     total = price + tax
