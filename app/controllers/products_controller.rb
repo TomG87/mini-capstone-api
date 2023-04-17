@@ -12,13 +12,18 @@ class ProductsController < ApplicationController
   end
   
   def create
-    if @product = Product.new(
+    @product = Product.new(
       name: params[:name], 
       price: params[:price], 
-      image_url: params[:image_url],
       description: params[:description],
       supplier_id: params[:supplier_id]
     )
+    if @product.save
+      @image = Image.new(
+        url: params[:id],
+        product_id: @product.id
+      )
+      @image.save
       render :show
     else
       render json: {errors: @product.errors.full.message}, status: :unprocessable_entity
@@ -29,7 +34,6 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @product.name = params[:name] || @product.name
     @product.price = params[:price] || @product.price
-    @product.image_url = params[:image_url] || @product.image_url
     @product.description = params[:description] || @product.description
     @product.supplier_id = params[:supplier_id] || @product.supplier_id
     @product.save
