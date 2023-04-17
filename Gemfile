@@ -74,3 +74,4 @@ end
 gem "rack-cors"
 gem 'seed_dump'
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
