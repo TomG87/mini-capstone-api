@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    user = User.new(
+    @user = User.new(
       name: params[:name],
       email: params[:email],
       password: params[:password],
@@ -12,4 +12,9 @@ class UsersController < ApplicationController
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
   end
+
+   def index
+    @user = User.all
+    render :index
+   end
 end
