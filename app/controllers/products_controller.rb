@@ -1,13 +1,10 @@
 class ProductsController < ApplicationController
-
+  # before_action :authenticate_admin, except: [:index, :show]
 
   def index
     @products = Product.all
-    if current_user
-      render :index
-    else
-      render json: {message: "You are not logged in! Denied"}, status: :unauthorized  
-    end
+    render :index
+    
   end
 
   def show    
@@ -18,19 +15,19 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(
       name: params[:name], 
-      price: params[:price], 
+      price: params[:price],
       description: params[:description],
-      supplier_id: params[:supplier_id]
+      supplier_id: params[:supplier_id]      
     )
     if @product.save
       @image = Image.new(
-        url: params[:id],
+        url: params[:image_url],
         product_id: @product.id
       )
-      @image.save
+      @image.save!
       render :show
     else
-      render json: {errors: @product.errors.full.message}, status: :unprocessable_entity
+      render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
