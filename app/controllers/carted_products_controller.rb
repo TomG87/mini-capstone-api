@@ -1,6 +1,7 @@
 class CartedProductsController < ApplicationController
 
   def create
+
     @carted_product = CartedProduct.new(
       user_id: current_user.id,
       product_id: params[:product_id],
@@ -12,12 +13,9 @@ class CartedProductsController < ApplicationController
   end
 
   def index
-    while current_user.id == true 
-        if CartedProducts.status == "carted"
-          render :index
-        else
-          render json: {message: "only carted items will show"}
-        end
-    end
+    @carted_products = CartedProduct.where(user_id: current_user.id, status: "carted")
+    render :index
   end
+
+
 end
